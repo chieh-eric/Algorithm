@@ -16,9 +16,9 @@ float dist(Point p1, Point p2)
 float brutefore(vector<Point> p, int n, int low)
 {
     float min = SIZE;
-    for (int i = low; i < n; i++)
+    for (int i = low; i < low+n; i++)
     {
-        for (int j = i + 1; j < n; ++j)
+        for (int j = i + 1; j < low+n; ++j)
         {
             if (dist(p[i], p[j]) < min)
             {
