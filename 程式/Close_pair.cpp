@@ -13,10 +13,10 @@ float dist(Point p1, Point p2)
 {
     return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
 }
-float brutefore(vector<Point> p, int n)
+float brutefore(vector<Point> p, int n, int low)
 {
     float min = SIZE;
-    for (int i = 0; i < n; i++)
+    for (int i = low; i < n; i++)
     {
         for (int j = i + 1; j < n; ++j)
         {
@@ -47,20 +47,19 @@ float update(vector<Point> domain, int size, float d)
     }
     return min;
 }
-float closetPair(vector<Point> p_x, vector<Point> p_y, int n, int low, int heigh)
+float closetPair(vector<Point> p_x, vector<Point> p_y, int low, int heigh)
 {
-    if (n <= 3)
+    if (heigh - low + 1 <= 3)
     {
-        return brutefore(p_x, n);
+        return brutefore(p_x, heigh - low + 1, low);
     }
     int mid = (low + heigh) / 2;
     Point midPoint = p_x[mid];
-    float dl = closetPair(p_x, p_y, mid, low, mid);
-    float dr = closetPair(p_x, p_y, n - mid, mid + 1, heigh);
+    float dl = closetPair(p_x, p_y, low, mid);
+    float dr = closetPair(p_x, p_y, mid + 1, heigh);
     float d = min(dl, dr);
-    vector<Point> domain(SIZE);
-    domain.resize(n);
-    for (int i = 0; i < n; i++)
+    vector<Point> domain;
+    for (int i = 0; i < heigh - low + 1; i++)
     {
         if (abs(p_y[i].x - midPoint.x) < d)
         {
@@ -104,5 +103,5 @@ int main()
     {
         p_sorted_y[i] = p[i];
     }
-    closetPair(p_sorted_x, p_sorted_y, num, low, heigh);
+    closetPair(p_sorted_x, p_sorted_y, low, heigh);
 }
