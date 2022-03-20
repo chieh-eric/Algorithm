@@ -61,9 +61,9 @@ float closetPair(vector<Point> p_x, vector<Point> p_y, int low, int heigh)
     vector<Point> domain;
     for (int i = 0; i < heigh - low + 1; i++)
     {
-        if (abs(p_y[i].x - midPoint.x) < d)
+        if (abs(p_x[i].x - midPoint.x) < d)
         {
-            domain.push_back(p_y[i]);
+            domain.push_back(p_x[i]);
         }
     }
     return min(d, update(domain, domain.size(), d));
@@ -93,15 +93,18 @@ int main()
     }
     low = 0;
     heigh = p.size() - 1;
-    qsort(p.data(), num, sizeof(int), compareX);
-    for (int i = 0; i < num; i++)
-    {
-        p_sorted_x[i] = p[i];
-    }
     qsort(p.data(), num, sizeof(int), compareY);
     for (int i = 0; i < num; i++)
     {
         p_sorted_y[i] = p[i];
     }
-    closetPair(p_sorted_x, p_sorted_y, low, heigh);
+    // qsort(p.data(), num, sizeof(int), compareX);
+    // for (int i = 0; i < num; i++)
+    // {
+    //     p_sorted_x[i] = p[i];
+    // }
+    cout <<p[1].x;
+    cout <<"1";
+    //cout << closetPair(p_sorted_x, p_sorted_y, low, heigh);
+    cout<<"2";
 }
